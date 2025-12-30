@@ -1,4 +1,5 @@
 #!/bin/bash
 set -euo pipefail
 
-echo one two
+var='something with spaces'
+echo $var
