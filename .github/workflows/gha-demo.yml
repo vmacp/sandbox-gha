@@ -20,8 +20,9 @@ jobs:
         run: |
           shopt -s globstar nullglob
           for script in scripts/**/*.sh; do
-              echo "=> Linting $script through shellcheck"
-              shellcheck "$script"
-              echo "   Script $script ok"
+            echo "=> Linting $script through shellcheck"
+            shellcheck "$script"
+            echo "   Script $script ok"
           done
-      - run: echo "🍏 This job's status is ${{ job.status }}."
+      - name: Job status
+        run: echo "🍏 Job status: ${{ job.status }}."
