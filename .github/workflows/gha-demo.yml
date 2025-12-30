@@ -18,4 +18,6 @@ jobs:
         run: |
           pwd
           ls ${{ github.workspace }}
+          cat ${{ github.workspace }}/main.sh
+          which shellcheck || echo No shellcheck available
       - run: echo "🍏 This job's status is ${{ job.status }}."
