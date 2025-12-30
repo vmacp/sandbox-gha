@@ -32,5 +32,3 @@ jobs:
           if [[ status -eq 1 ]]; then
             exit 1
           fi
-      - name: Job status
-        run: echo "🍏 Job status: ${{ job.status }}."
