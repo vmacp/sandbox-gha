@@ -25,7 +25,7 @@ jobs:
             if shellcheck "$script"; then
               echo "   Script $script ok"
             else
-              echo "::error file=${script}"
+              echo "::error file=${script}::Shellcheck error on file ${script}"
               status=1
             fi
           done
