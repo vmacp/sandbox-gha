@@ -19,6 +19,11 @@ jobs:
           pwd
           ls ${{ github.workspace }}
           cat ${{ github.workspace }}/main.sh
-          which shellcheck || echo No shellcheck available
-          find -name "*.sh" -exec shellcheck {} \;
+      - name: Lint scripts using shellcheck
+        run: |
+          while IFS= read -r script; do
+              echo "Linting $script through shellcheck"
+              shellcheck "$script"
+              echo "Script $script ok"
+          done < <(find scripts -name '*.sh')
       - run: echo "🍏 This job's status is ${{ job.status }}."
