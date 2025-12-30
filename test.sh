@@ -1,8 +1,9 @@
 #!/bin/bash
 set -euo pipefail
 
-while IFS= read -r script; do
-    echo "Linting $script through shellcheck"
+shopt -s globstar nullglob
+for script in scripts/**/*.sh; do
+    echo "=> Linting $script through shellcheck"
     shellcheck "$script"
-    echo "Script $script ok"
-done < <(find scripts -name '*.sh')
+    echo "   Script $script ok"
+done

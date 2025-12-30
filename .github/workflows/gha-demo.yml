@@ -18,9 +18,10 @@ jobs:
         run: ls ${{ github.workspace }}
       - name: Lint scripts using shellcheck
         run: |
-          while IFS= read -r script; do
+          shopt -s globstar nullglob
+          for script in scripts/**/*.sh; do
               echo "=> Linting $script through shellcheck"
               shellcheck "$script"
               echo "   Script $script ok"
-          done < <(find scripts -name '*.sh')
+          done
       - run: echo "🍏 This job's status is ${{ job.status }}."
