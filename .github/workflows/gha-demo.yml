@@ -19,10 +19,18 @@ jobs:
       - name: Lint scripts using shellcheck
         run: |
           shopt -s globstar nullglob
+          status=0
           for script in scripts/**/*.sh; do
             echo "=> Linting $script through shellcheck"
-            shellcheck "$script"
-            echo "   Script $script ok"
+            if shellcheck "$script"; then
+              echo "   Script $script ok"
+            else
+              echo "::error file=${script}"
+              status=1
+            fi
           done
+          if [[ status -eq 1 ]]; then
+            exit 1
+          fi
       - name: Job status
         run: echo "🍏 Job status: ${{ job.status }}."
