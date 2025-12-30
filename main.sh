@@ -2,4 +2,4 @@
 set -euo pipefail
 
 var='something with spaces'
-echo $var
+echo "$var"
