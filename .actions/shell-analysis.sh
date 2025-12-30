@@ -12,7 +12,11 @@ for script in "$rootdir"/**/*.sh; do
         echo "::notice file=${script}::shellcheck - $script ok"
     else
         unclean_scripts+=("$script")
-        echo "::error file=${script},line=9::Shellcheck error on file ${script}"
+        shellcheck_data="$(shellcheck -f json1 "$script" || true)"
+        exp='.comments[] | "file=\(.file),line=\(.line),endLine=\(.endLine)col=\(.column),endColumn=\(.endColumn)::\(.message)"' 
+        jq -r "$exp" <<< "$shellcheck_data" | while IFS= read -r log; do
+            echo "::error $log"
+        done
     fi
 done
 
