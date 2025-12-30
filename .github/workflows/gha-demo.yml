@@ -19,8 +19,8 @@ jobs:
       - name: Lint scripts using shellcheck
         run: |
           while IFS= read -r script; do
-              echo "Linting $script through shellcheck"
+              echo "=> Linting $script through shellcheck"
               shellcheck "$script"
-              echo "Script $script ok"
+              echo "   Script $script ok"
           done < <(find scripts -name '*.sh')
       - run: echo "🍏 This job's status is ${{ job.status }}."
