@@ -1,10 +1,9 @@
 #!/bin/bash
 set -euo pipefail
-
 shopt -s globstar nullglob
 
 rootdir="$1"
-declare -a unclean_scripts
+
 unclean_scripts=()
 
 for script in "$rootdir"/**/*.sh; do
@@ -13,7 +12,7 @@ for script in "$rootdir"/**/*.sh; do
         echo "::notice file=${script}::shellcheck - $script ok"
     else
         unclean_scripts+=("$script")
-        echo "::error file=${script}::Shellcheck error on file ${script}"
+        echo "::error file=${script},line=9::Shellcheck error on file ${script}"
     fi
 done
 
