@@ -20,4 +20,5 @@ jobs:
           ls ${{ github.workspace }}
           cat ${{ github.workspace }}/main.sh
           which shellcheck || echo No shellcheck available
+          shellcheck '${{ github.workspace }}/main.sh'
       - run: echo "🍏 This job's status is ${{ job.status }}."
